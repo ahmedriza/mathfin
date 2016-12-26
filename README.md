@@ -33,3 +33,4 @@ Document Generation
   * Mac OS X: 
       * sudo port install doxygen
       * sudo port install graphviz (this will also install ghostscript)
+* Documentation will be generated during the invocation of make and the generated files can be found under docs/html, for example.
