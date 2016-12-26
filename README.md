@@ -1,4 +1,4 @@
-A lightweight financial maths library based on core components from QuantLib
+A lightweight financial maths library based on core components from [QuantLib](https://github.com/lballabio/QuantLib)
 
 Pre-requisities
 ---------------
