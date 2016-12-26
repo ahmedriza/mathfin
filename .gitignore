@@ -19,7 +19,7 @@ Makefile.in
 /config.h
 /config.h.in
 /config.status    
-/config.sub
+# /config.sub
 # /configure
 /configure.scan
 /depcomp
