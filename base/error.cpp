@@ -17,7 +17,7 @@
   with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <base/error.h>
+#include <base/error.hpp>
 
 namespace FinMath {
 

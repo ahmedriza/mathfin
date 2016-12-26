@@ -17,8 +17,8 @@
   with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FINMATH_DATE_H
-#define FINMATH_DATE_H
+#ifndef FINMATH_DATE_HPP
+#define FINMATH_DATE_HPP
 
 namespace FinMath {
 
@@ -27,4 +27,4 @@ namespace FinMath {
   };
 }
 
-#endif /* FINMATH_DATE_H */
+#endif /* FINMATH_DATE_HPP */

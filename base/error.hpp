@@ -17,8 +17,8 @@
   with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FINMATH_ERROR_H
-#define FINMATH_ERROR_H
+#ifndef FINMATH_ERROR_HPP
+#define FINMATH_ERROR_HPP
 
 #include <exception>
 #include <memory>
@@ -40,4 +40,4 @@ namespace FinMath {
   };
 }
 
-#endif /* FINMATH_ERROR_H */
+#endif /* FINMATH_ERROR_HPP */

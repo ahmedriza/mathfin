@@ -20,7 +20,7 @@
 #define CATCH_CONFIG_MAIN
 
 #include <test/catch.hpp>
-#include <base/error.h>
+#include <base/error.hpp>
 
 TEST_CASE( "Error constructor", "[error]") {
   FinMath::Error error("myfile", 1, "someFunction", "invalid input");

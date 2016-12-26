@@ -37,10 +37,20 @@ AC_DISABLE_STATIC
 
 BOOST_REQUIRE
 
+AC_CHECK_PROGS([DOXYGEN], [doxygen])
+  if test -z "$DOXYGEN";
+    then AC_MSG_WARN([Doxygen not found - continuing without Doxygen support])
+  fi
+
+AM_CONDITIONAL([HAVE_DOXYGEN],
+  [test -n "$DOXYGEN"])AM_COND_IF([HAVE_DOXYGEN],
+  [AC_CONFIG_FILES([docs/Doxyfile])])
+
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
   Makefile
   base/Makefile
+  docs/Makefile
   math/Makefile
   time/Makefile
   ])

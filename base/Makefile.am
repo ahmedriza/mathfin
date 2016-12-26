@@ -23,7 +23,7 @@ LDADD = libBase.la
 this_includedir=${includedir}/${subdir}
 
 this_include_HEADERS = \
-	error.h
+	error.hpp
 
 lib_LTLIBRARIES = libBase.la
 

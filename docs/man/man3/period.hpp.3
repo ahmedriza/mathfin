@@ -1,0 +1,83 @@
+.TH "/Users/ahmed/Work/MathFin/time/period.hpp" 3 "Mon Dec 26 2016" "Version 1.0" "MathFin" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/Users/ahmed/Work/MathFin/time/period.hpp \- period and frequency-related classes and enumerations  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <time/frequency\&.hpp>\fP
+.br
+\fC#include <time/timeunit\&.hpp>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBMathFin::Period\fP"
+.br
+.ti -1c
+.RI "struct \fBMathFin::detail::long_period_holder\fP"
+.br
+.ti -1c
+.RI "struct \fBMathFin::detail::short_period_holder\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "std::ostream & \fBMathFin::detail::operator<<\fP (std::ostream &, const long_period_holder &)"
+.br
+.ti -1c
+.RI "std::ostream & \fBMathFin::detail::operator<<\fP (std::ostream &, const short_period_holder &)"
+.br
+.ti -1c
+.RI "detail::long_period_holder \fBMathFin::io::long_period\fP (const Period &)"
+.br
+.RI "\fIoutput periods in long format (e\&.g\&. '2 weeks') \fP"
+.ti -1c
+.RI "detail::short_period_holder \fBMathFin::io::short_period\fP (const Period &)"
+.br
+.RI "\fIoutput periods in short format (e\&.g\&. '2w') \fP"
+.ti -1c
+.RI "template<typename T > Period \fBMathFin::operator*\fP (T n, TimeUnit units)"
+.br
+.ti -1c
+.RI "template<typename T > Period \fBMathFin::operator*\fP (TimeUnit units, T n)"
+.br
+.ti -1c
+.RI "Period \fBMathFin::operator\-\fP (const Period &p)"
+.br
+.ti -1c
+.RI "Period \fBMathFin::operator*\fP (Integer n, const Period &p)"
+.br
+.ti -1c
+.RI "Period \fBMathFin::operator*\fP (const Period &p, Integer n)"
+.br
+.ti -1c
+.RI "bool \fBMathFin::operator==\fP (const Period &p1, const Period &p2)"
+.br
+.ti -1c
+.RI "bool \fBMathFin::operator!=\fP (const Period &p1, const Period &p2)"
+.br
+.ti -1c
+.RI "bool \fBMathFin::operator>\fP (const Period &p1, const Period &p2)"
+.br
+.ti -1c
+.RI "bool \fBMathFin::operator<=\fP (const Period &p1, const Period &p2)"
+.br
+.ti -1c
+.RI "bool \fBMathFin::operator>=\fP (const Period &p1, const Period &p2)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+period and frequency-related classes and enumerations 
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for MathFin from the source code\&.

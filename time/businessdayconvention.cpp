@@ -38,8 +38,8 @@
 
 */
 
-#include <time/businessdayconvention.h>
-#include <base/error.h>
+#include <time/businessdayconvention.hpp>
+#include <base/error.hpp>
 #include <iostream>
 
 namespace FinMath {

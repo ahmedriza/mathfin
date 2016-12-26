@@ -19,6 +19,7 @@ ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS = \
 	base \
+	docs \
 	math \
 	time
 

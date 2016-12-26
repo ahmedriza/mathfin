@@ -21,14 +21,18 @@ AM_CPPFLAGS = -std=c++11 $(BOOST_CPPFLAGS)
 this_includedir=${includedir}/${subdir}
 
 this_include_HEADERS = \
-	date.h \
-	businessdayconvention.h
+	date.hpp \
+	businessdayconvention.hpp \
+	frequency.hpp \
+	timeunit.hpp
 
 lib_LTLIBRARIES = libTime.la
 
 libTime_la_SOURCES = \
 	date.cpp \
-	businessdayconvention.cpp
+	businessdayconvention.cpp \
+	frequency.cpp \
+	timeunit.cpp
 
 libTime_la_CXXFLAGS = -std=c++11 $(BOOST_CPPFLAGS)
 

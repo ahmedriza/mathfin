@@ -1,0 +1,156 @@
+.TH "MathFin::Period" 3 "Mon Dec 26 2016" "Version 1.0" "MathFin" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MathFin::Period \- 
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <period\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBPeriod\fP (Integer n, TimeUnit units)"
+.br
+.ti -1c
+.RI "\fBPeriod\fP (Frequency f)"
+.br
+.ti -1c
+.RI "Integer \fBlength\fP () const "
+.br
+.ti -1c
+.RI "TimeUnit \fBunits\fP () const "
+.br
+.ti -1c
+.RI "Frequency \fBfrequency\fP () const "
+.br
+.ti -1c
+.RI "\fBPeriod\fP & \fBoperator+=\fP (const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "\fBPeriod\fP & \fBoperator\-=\fP (const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "\fBPeriod\fP & \fBoperator/=\fP (Integer)"
+.br
+.ti -1c
+.RI "void \fBnormalize\fP ()"
+.br
+.in -1c
+.SS "Related Functions"
+(Note that these are not member functions\&.) 
+.in +1c
+.ti -1c
+.RI "Real \fByears\fP (const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "Real \fBmonths\fP (const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "Real \fBweeks\fP (const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "Real \fBdays\fP (const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "template<typename T > \fBPeriod\fP \fBoperator*\fP (T n, TimeUnit units)"
+.br
+.ti -1c
+.RI "template<typename T > \fBPeriod\fP \fBoperator*\fP (TimeUnit units, T n)"
+.br
+.ti -1c
+.RI "\fBPeriod\fP \fBoperator\-\fP (const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "\fBPeriod\fP \fBoperator*\fP (Integer n, const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "\fBPeriod\fP \fBoperator*\fP (const \fBPeriod\fP &, Integer n)"
+.br
+.ti -1c
+.RI "\fBPeriod\fP \fBoperator/\fP (const \fBPeriod\fP &, Integer n)"
+.br
+.ti -1c
+.RI "\fBPeriod\fP \fBoperator+\fP (const \fBPeriod\fP &, const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "\fBPeriod\fP \fBoperator\-\fP (const \fBPeriod\fP &, const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "bool \fBoperator<\fP (const \fBPeriod\fP &, const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBPeriod\fP &, const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "bool \fBoperator!=\fP (const \fBPeriod\fP &, const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "bool \fBoperator>\fP (const \fBPeriod\fP &, const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "bool \fBoperator<=\fP (const \fBPeriod\fP &, const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "bool \fBoperator>=\fP (const \fBPeriod\fP &, const \fBPeriod\fP &)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &, const \fBPeriod\fP &)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This class provides a \fBPeriod\fP (length + TimeUnit) class and implements a limited algebra\&.
+.PP
+\fBTest\fP
+.RS 4
+self-consistency of algebra is checked\&. 
+.RE
+.PP
+
+.SH "Friends And Related Function Documentation"
+.PP 
+.SS "Real days (const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "Real months (const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "bool operator!= (const \fBPeriod\fP &, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "template<typename T > \fBPeriod\fP operator* (T n, TimeUnit units)\fC [related]\fP"
+
+.SS "template<typename T > \fBPeriod\fP operator* (TimeUnit units, T n)\fC [related]\fP"
+
+.SS "\fBPeriod\fP operator* (Integer n, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "\fBPeriod\fP operator* (const \fBPeriod\fP &, Integer n)\fC [related]\fP"
+
+.SS "\fBPeriod\fP operator+ (const \fBPeriod\fP &, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "\fBPeriod\fP operator\- (const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "\fBPeriod\fP operator\- (const \fBPeriod\fP &, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "\fBPeriod\fP operator/ (const \fBPeriod\fP &, Integer n)\fC [related]\fP"
+
+.SS "bool operator< (const \fBPeriod\fP &, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "std::ostream & operator<< (std::ostream &, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "bool operator<= (const \fBPeriod\fP &, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "bool operator== (const \fBPeriod\fP &, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "bool operator> (const \fBPeriod\fP &, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "bool operator>= (const \fBPeriod\fP &, const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "Real weeks (const \fBPeriod\fP &)\fC [related]\fP"
+
+.SS "Real years (const \fBPeriod\fP &)\fC [related]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for MathFin from the source code\&.

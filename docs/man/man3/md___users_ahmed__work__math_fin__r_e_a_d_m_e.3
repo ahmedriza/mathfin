@@ -1,0 +1,77 @@
+.TH "md___users_ahmed__work__math_fin__r_e_a_d_m_e" 3 "Mon Dec 26 2016" "Version 1.0" "MathFin" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md___users_ahmed__work__math_fin__r_e_a_d_m_e \- README 
+A lightweight financial maths library based on core components from \fCQuantLib\fP
+.PP
+.SS "Pre-requisities "
+.PP
+.IP "\(bu" 2
+A recent version of \fCboost\fP
+.IP "\(bu" 2
+The easisest way to install boost is by using the repository manager (or equivalent) for your OS:
+.IP "  \(bu" 4
+Ubuntu/Debian: sudo apt-get install libboost-all-dev
+.IP "  \(bu" 4
+CentOs/RedHat: sudo yum install boost-devel
+.IP "  \(bu" 4
+Mac OS X: sudo port install boost (\fCusing MacPorts\fP)
+.PP
+
+.PP
+.PP
+.SS "Installation "
+.PP
+.IP "\(bu" 2
+Run \&./autogen\&.sh in order to generate the configure script\&.
+.IP "\(bu" 2
+Run \&./configure --help to see available options
+.IP "\(bu" 2
+Example:
+.IP "  \(bu" 4
+\&./autogen\&.sh
+.IP "  \(bu" 4
+\&./configure
+.IP "  \(bu" 4
+make
+.IP "  \(bu" 4
+make check (run tests)
+.PP
+
+.PP
+.PP
+.SS "Development "
+.PP
+.IP "\(bu" 2
+Developed primarily using g++ (requires a compiler that supports c++11)\&.
+.IP "\(bu" 2
+For unit tests, I am using the excellent \fCCatch\fP library; the single header can be found under the test subdirectory\&.
+.PP
+.PP
+.SS "Document Generation "
+.PP
+.IP "\(bu" 2
+In order to generate documentation from doxygen, need the following tools installed:
+.IP "  \(bu" 4
+\fCdoxygen\fP
+.IP "  \(bu" 4
+\fCgraphviz\fP
+.IP "  \(bu" 4
+\fCghostscript\fP
+.PP
+
+.IP "\(bu" 2
+The easisest way to get these tools installed is by using the repository manager (or equivalent) for your OS:
+.IP "  \(bu" 4
+Mac OS X:
+.IP "    \(bu" 6
+sudo port install doxygen
+.IP "    \(bu" 6
+sudo port install graphviz (this will also install ghostscript) 
+.PP
+
+.PP
+
+.PP
+

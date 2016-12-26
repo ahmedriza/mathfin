@@ -21,8 +21,8 @@
 
 #include <iostream>
 #include <test/catch.hpp>
-#include <base/error.h>
-#include <time/businessdayconvention.h>
+#include <base/error.hpp>
+#include <time/businessdayconvention.hpp>
 
 TEST_CASE( "Following outputs 'Following'", "[businessdayconvention]") {
   FinMath::BusinessDayConvention convention = FinMath::BusinessDayConvention::Following;
