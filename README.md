@@ -1,5 +1,9 @@
 A lightweight financial maths library based on core components from QuantLib
 
+Pre-requisities
+---------------
+* A recent version of boost from http://www.boost.org
+
 Installation
 ------------
 * Run ./autogen.sh in order to generate the configure script.
