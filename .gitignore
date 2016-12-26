@@ -12,15 +12,15 @@ Makefile.in
 /autom4te.cache
 /autoscan.log
 /autoscan-*.log
-/aclocal.m4
+# /aclocal.m4
 /compile
 /config.guess
 /config.h.in
 /config.sub
-/configure
+# /configure
 /configure.scan
 /depcomp
-/install-sh
+# /install-sh
 /missing
 /stamp-h1
 
