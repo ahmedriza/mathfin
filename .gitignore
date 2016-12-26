@@ -31,3 +31,24 @@ Makefile.in
 # http://www.gnu.org/software/texinfo
 
 /texinfo.tex
+
+.deps/
+
+*.slo
+*.lo
+*.la
+*.o
+*.obj
+
+*.log
+
+*.so    
+*.dylib
+
+*.trs
+
+.libs
+base/baseTest
+math/mathTest
+time/timeTest
+
