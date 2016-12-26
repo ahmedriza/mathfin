@@ -6,7 +6,7 @@ Installation
 * Run ./configure --help to see available options
 
 Example:
-	*./autogen.sh
-	* ./configure
-	* make
-	* make check
+* ./autogen.sh
+* ./configure
+* make
+* make check
