@@ -38,6 +38,7 @@ config.status
 
 .deps/
 
+docs/Doxyfile
 docs/*.stamp
 docs/latex
 docs/html
