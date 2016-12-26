@@ -1,4 +1,4 @@
-AC_CONFIG_MACRO_DIRS([m4])
+AC_CONFIG_MACRO_DIR([m4])
 
 AC_INIT([MathFin], [1.0], [ahmed.riza@gmail.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
