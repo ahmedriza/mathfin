@@ -38,6 +38,11 @@ config.status
 
 .deps/
 
+docs/*.stamp
+docs/latex
+docs/html
+docs/man
+
 *.slo
 *.lo
 *.la
