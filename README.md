@@ -5,7 +5,7 @@ Pre-requisities
 * A recent version of [boost](http://www.boost.org)
 * The easisest way to install boost is by using the repository manager (or equivalent) for your OS:
   * Ubuntu/Debian: sudo apt-get install libboost-all-dev
-  * CentOs/RedHat: yum install boost-devel
+  * CentOs/RedHat: sudo yum install boost-devel
   * Mac OS X: sudo port install boost ([using MacPorts](https://www.macports.org/))
 
 Installation
