@@ -1,5 +1,6 @@
 # http://www.gnu.org/software/automake
 
+Makefile
 Makefile.in
 /ar-lib
 /mdate-sh
@@ -15,7 +16,9 @@ Makefile.in
 # /aclocal.m4
 /compile
 /config.guess
+/config.h
 /config.h.in
+/config.status    
 /config.sub
 # /configure
 /configure.scan
