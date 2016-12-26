@@ -5,4 +5,3 @@ SUBDIRS = \
 	math \
 	time
 
-dist_doc_DATA = README
