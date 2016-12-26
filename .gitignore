@@ -9,7 +9,7 @@ Makefile.in
 /ylwrap
 
 # http://www.gnu.org/software/autoconf
-
+config.status
 /autom4te.cache
 /autoscan.log
 /autoscan-*.log
@@ -29,6 +29,7 @@ Makefile.in
 
 # https://www.gnu.org/software/libtool/
 
+/libtool
 /ltmain.sh
 
 # http://www.gnu.org/software/texinfo
