@@ -43,82 +43,103 @@
 #ifndef MATHFIN_TYPES_HPP
 #define MATHFIN_TYPES_HPP
 
+/**
+ * @defgroup types Numeric Types
+ * A number of numeric types are defined in order to add clarity to function and
+ * method declarations.
+ */
+
 namespace MathFin {
   /**
-   * integer number
-   * \ingroup types
+   * integer number.
+   *
+   * 32 bit machine representation for an integer.
+   * @ingroup types
    */
   typedef int Integer;
 
   /**
-   * large integer number
-   * \ingroup types
+   * large integer number.
+   *
+   * 64 bit machine representation for an integer.
+   * @ingroup types
    */
   typedef long BigInteger;
 
   /**
    * positive number
-   * \ingroup types
+   *
+   * 32 bit machine representation for positive numbers
+   * @ingroup types
    */
   typedef unsigned int Natural;
 
   /**
    * large positive number
-   * \ingroup types
+   *
+   * 64 bit machine representation for positive integers.
+   * @ingroup types
    */
   typedef unsigned long BigNatural;
 
   /**
    * real number
-   * \ingroup types
+   *
+   * 64 bit machine representation for real numbers.
+   * @ingroup types
    */
   typedef double Real;
 
   /**
    * decimal number
-   * \ingroup types
+   *
+   * 64 bit machine representation for decimal numbers.
+   * @ingroup types
    */
   typedef Real Decimal;
 
   /**
    * size of a container
-   * \ingroup types
+   *
+   * a convenience type definition for standard container types such as std::list
+   * and so on.
+   * @ingroup types
    */
   typedef std::size_t Size;
 
   /**
    * continuous quantity with 1-year units
-   * \ingroup types
+   * @ingroup types
    */
   typedef Real Time;
 
   /**
    * discount factor between dates
-   * \ingroup types
+   * @ingroup types
    */
   typedef Real DiscountFactor;
 
   /**
    * interest rates
-   * \ingroup types
+   * @ingroup types
    */
   typedef Real Rate;
 
   /**
    * spreads on interest rates
-   * \ingroup types
+   * @ingroup types
    */
   typedef Real Spread;
 
   /**
    * volatility
-   * \ingroup types
+   * @ingroup types
    */
   typedef Real Volatility;
 
   /**
    * probability
-   * \ingroup types
+   * @ingroup types
    */
   typedef Real Probability;
 }

@@ -24,9 +24,10 @@
 #include <memory>
 #include <sstream>
 #include <string>
-#include <boost/current_function.hpp>
 
-namespace FinMath {
+// #include <boost/current_function.hpp>
+
+namespace MathFin {
   class Error : public std::exception {
   public:
     Error(const std::string& file,
@@ -39,5 +40,44 @@ namespace FinMath {
     std::shared_ptr<std::string> message_;
   };
 }
+
+#define MULTILINE_MACRO_BEGIN do {
+
+#if defined(BOOST_MSVC) && BOOST_MSVC >= 1500
+/* __pragma is available from VC++9 */
+#define MULTILINE_MACRO_END                     \
+  __pragma(warning(push))                       \
+  __pragma(warning(disable:4127))               \
+  } while(false)                                \
+  __pragma(warning(pop))
+#else
+#define MULTILINE_MACRO_END } while(false)
+#endif
+
+
+/**
+ * \def MF_FAIL
+ * \brief throw an error (possibly with file and line information)
+ */
+#define MF_FAIL(message)                                             \
+  MULTILINE_MACRO_BEGIN                                               \
+  std::ostringstream _ql_msg_stream;                                  \
+  _ql_msg_stream << message;                                          \
+  throw MathFin::Error(__FILE__,__LINE__,                             \
+                        __func__,_ql_msg_stream.str()); \
+  MULTILINE_MACRO_END
+
+/**
+ * \def MF_REQUIRE
+ * throw an error if the given pre-condition is not verified
+ */
+#define MF_REQUIRE(condition,message)                                  \
+  if (!(condition)) {                                                   \
+    std::ostringstream _ql_msg_stream;                                  \
+    _ql_msg_stream << message;                                          \
+    throw MathFin::Error(__FILE__,__LINE__,                             \
+                          __func__,_ql_msg_stream.str()); \
+  } else
+
 
 #endif /* FINMATH_ERROR_HPP */

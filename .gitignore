@@ -57,6 +57,14 @@ docs/man
 
 *.trs
 
+.cproject
+.project
+.settings
+
+GPATH
+GRTAGS
+GTAGS
+
 .libs
 base/baseTest
 math/mathTest

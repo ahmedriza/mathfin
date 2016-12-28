@@ -44,7 +44,7 @@
 
 #include <iosfwd>
 
-namespace FinMath {
+namespace MathFin {
 
   //! Business Day conventions
   /*! These conventions specify the algorithm used to adjust a date in case

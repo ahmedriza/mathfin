@@ -25,49 +25,49 @@
 #include <time/businessdayconvention.hpp>
 
 TEST_CASE( "Following outputs 'Following'", "[businessdayconvention]") {
-  FinMath::BusinessDayConvention convention = FinMath::BusinessDayConvention::Following;
+  MathFin::BusinessDayConvention convention = MathFin::BusinessDayConvention::Following;
   std::ostringstream stream;
   stream << convention;
   REQUIRE(stream.str() == "Following");
 }
 
 TEST_CASE( "ModifiedFollowing outputs 'Modified Following'", "[businessdayconvention]") {
-  FinMath::BusinessDayConvention convention = FinMath::BusinessDayConvention::ModifiedFollowing;
+  MathFin::BusinessDayConvention convention = MathFin::BusinessDayConvention::ModifiedFollowing;
   std::ostringstream stream;
   stream << convention;
   REQUIRE(stream.str() == "Modified Following");
 }
 
 TEST_CASE( "HalfMonthModifiedFollowing outputs 'Half-Month Modified Following'", "[businessdayconvention]") {
-  FinMath::BusinessDayConvention convention = FinMath::BusinessDayConvention::HalfMonthModifiedFollowing;
+  MathFin::BusinessDayConvention convention = MathFin::BusinessDayConvention::HalfMonthModifiedFollowing;
   std::ostringstream stream;
   stream << convention;
   REQUIRE(stream.str() == "Half-Month Modified Following");
 }
 
 TEST_CASE( "Preceding outputs 'Preceding'", "[businessdayconvention]") {
-  FinMath::BusinessDayConvention convention = FinMath::BusinessDayConvention::Preceding;
+  MathFin::BusinessDayConvention convention = MathFin::BusinessDayConvention::Preceding;
   std::ostringstream stream;
   stream << convention;
   REQUIRE(stream.str() == "Preceding");
 }
 
 TEST_CASE( "ModifiedPreceding outputs 'Modified Preceding'", "[businessdayconvention]") {
-  FinMath::BusinessDayConvention convention = FinMath::BusinessDayConvention::ModifiedPreceding;
+  MathFin::BusinessDayConvention convention = MathFin::BusinessDayConvention::ModifiedPreceding;
   std::ostringstream stream;
   stream << convention;
   REQUIRE(stream.str() == "Modified Preceding");
 }
 
 TEST_CASE( "Nearest outputs 'Nearest'", "[businessdayconvention]") {
-  FinMath::BusinessDayConvention convention = FinMath::BusinessDayConvention::Nearest;
+  MathFin::BusinessDayConvention convention = MathFin::BusinessDayConvention::Nearest;
   std::ostringstream stream;
   stream << convention;
   REQUIRE(stream.str() == "Nearest");
 }
 
 TEST_CASE( "Uknown should throw", "[businessdayconvention]") {
-  FinMath::BusinessDayConvention convention = FinMath::BusinessDayConvention::Unknown;
+  MathFin::BusinessDayConvention convention = MathFin::BusinessDayConvention::Unknown;
   std::ostringstream stream;
-  CHECK_THROWS_AS(stream << convention, FinMath::Error);
+  CHECK_THROWS_AS(stream << convention, MathFin::Error);
 }

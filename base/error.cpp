@@ -19,7 +19,7 @@
 
 #include <base/error.hpp>
 
-namespace FinMath {
+namespace MathFin {
 
   std::string format(const std::string& file,
                      long line,

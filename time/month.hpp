@@ -19,9 +19,11 @@
 
 /*
   Copyright (C) 2000, 2001, 2002, 2003 RiskMap srl
-  Copyright (C) 2003, 2004, 2005, 2006, 2007 StatPro Italia srl
-  Copyright (C) 2006 Piter Dias
-  Copyright (C) 2014 Paolo Mazzocchi
+  Copyright (C) 2003, 2004, 2005, 2006 StatPro Italia srl
+  Copyright (C) 2004, 2005, 2006 Ferdinando Ametrano
+  Copyright (C) 2006 Katiuscia Manzoni
+  Copyright (C) 2006 Toyin Akin
+  Copyright (C) 2015 Klaus Spanderen
 
   This file is part of QuantLib, a free-software/open-source library
   for financial quantitative analysts and developers - http://quantlib.org/
@@ -35,33 +37,47 @@
   This program is distributed in the hope that it will be useful, but WITHOUT
   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
   FOR A PARTICULAR PURPOSE.  See the license for more details.
-
 */
 
-#include <time/businessdayconvention.hpp>
-#include <base/error.hpp>
-#include <iostream>
+#ifndef MATHFIN_MONTH_HPP
+#define MATHFIN_MONTH_HPP
 
 namespace MathFin {
 
-  std::ostream& operator<<(std::ostream& out, BusinessDayConvention b) {
-    switch (b) {
-    case BusinessDayConvention::Following:
-      return out << "Following";
-    case BusinessDayConvention::ModifiedFollowing:
-      return out << "Modified Following";
-    case BusinessDayConvention::HalfMonthModifiedFollowing:
-      return out << "Half-Month Modified Following";
-    case BusinessDayConvention::Preceding:
-      return out << "Preceding";
-    case BusinessDayConvention::ModifiedPreceding:
-      return out << "Modified Preceding";
-    case BusinessDayConvention::Unadjusted:
-      return out << "Unadjusted";
-    case BusinessDayConvention::Nearest:
-      return out << "Nearest";
-    default:
-      MF_FAIL("Unknown BusinessDayConvention (" << int(b) << ")");
-    }
-  }
+  /**
+   * Month names
+   * @ingroup datetime
+   */
+  enum class Month { January   = 1,
+      February  = 2,
+      March     = 3,
+      April     = 4,
+      May       = 5,
+      June      = 6,
+      July      = 7,
+      August    = 8,
+      September = 9,
+      October   = 10,
+      November  = 11,
+      December  = 12,
+      Jan = 1,
+      Feb = 2,
+      Mar = 3,
+      Apr = 4,
+      Jun = 6,
+      Jul = 7,
+      Aug = 8,
+      Sep = 9,
+      Oct = 10,
+      Nov = 11,
+      Dec = 12
+      };
+
+  /**
+   * @relates Month
+   */
+  std::ostream& operator<<(std::ostream&, const Month&);
+
 }
+
+#endif /* MATHFIN_MONTH_HPP */

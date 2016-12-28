@@ -37,103 +37,196 @@
   FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-/*! \file period.hpp
-  \brief period and frequency-related classes and enumerations
-*/
+/**
+ * \file period.hpp
+ * \brief period and frequency-related classes and enumerations
+ */
 
 #ifndef MATHFIN_PERIOD_HPP
 #define MATHFIN_PERIOD_HPP
 
+#include <base/types.hpp>
 #include <time/frequency.hpp>
 #include <time/timeunit.hpp>
 
 namespace MathFin {
 
-  /*! This class provides a Period (length + TimeUnit) class
-    and implements a limited algebra.
-
-    \ingroup datetime
-
-    \test self-consistency of algebra is checked.
-  */
+  /**
+   * This class provides a Period (length + TimeUnit) class
+   * and implements a limited algebra.
+   *
+   * A period represents a length and a TimeUnit.  For example,
+   * Period(1, TimeUnit::Months) represents a period of 1 month.
+   *
+   * @ingroup datetime
+   */
   class Period {
 
   public:
-    Period() : length_(0), units_(Days) {}
+    /**
+     * Construct a period of 0 length and TimeUnit of days.
+     */
+    Period() : length_(0), units_(TimeUnit::Days) {}
+
+    /**
+     * Construct a period of length n and TimeUnit of units.
+     */
     Period(Integer n, TimeUnit units) : length_(n), units_(units) {}
-    explicit Period(Frequency f);
+
+    /**
+     * Construct a period using the given Frequence f.
+     */
+    static const Period of(const Frequency& f);
+
+    /**
+     * Get the length of the period.
+     */
     Integer length() const { return length_; }
+
+    /**
+     * Get the TimeUnit units of the period.
+     */
     TimeUnit units() const { return units_; }
+
+    /**
+     * Get the frequency that corresponds to this Period instance.
+     */
     Frequency frequency() const;
-    Period& operator+=(const Period&);
-    Period& operator-=(const Period&);
-    Period& operator/=(Integer);
-    void normalize();
+
+    /**
+     * If the unit is TimeUnit::Months and the length is even, then convert
+     * unit to TimeUnit::Years and length to the number of years in the period.
+     * Otherwise return the period unchanged.
+     */
+    const Period normalize() const;
 
   private:
-    Integer  length_;
-    TimeUnit units_;
+    Period& operator=(const Period&);
+    const Integer  length_;
+    const TimeUnit units_;
   };
 
-  /*! \relates Period */
+  /**
+   * Get the number of years in the period.
+   * @relates Period
+   */
   Real years(const Period&);
 
-  /*! \relates Period */
+  /**
+   * Get the number of months in the period.
+   * @relates Period
+   */
   Real months(const Period&);
 
-  /*! \relates Period */
+  /**
+   * Get the number of weeks in the period.
+   * @relates Period
+   */
   Real weeks(const Period&);
 
-  /*! \relates Period */
+  /**
+   * Get the number of days in the period.
+   * @relates Period
+   */
   Real days(const Period&);
 
-  /*! \relates Period */
-  template <typename T> Period operator*(T n, TimeUnit units);
+  /**
+   * Subtraction operator
+   * @relates Period
+   */
+  inline Period operator-(const Period& p) {
+    return Period(-p.length(), p.units());
+  }
 
-  /*! \relates Period */
-  template <typename T> Period operator*(TimeUnit units, T n);
-
-  /*! \relates Period */
-  Period operator-(const Period&);
-
-  /*! \relates Period */
+  /**
+   * Return a period of length n * length of the given period and its units.
+   * @relates Period
+   */
   Period operator*(Integer n, const Period&);
 
-  /*! \relates Period */
-  Period operator*(const Period&, Integer n);
+  inline Period operator*(Integer n, const Period& p) {
+    return Period(n * p.length(), p.units());
+  }
 
-  /*! \relates Period */
+  /**
+   * Return a period of length n * length of the given period and its units.
+   * @relates Period
+   */
+  inline Period operator*(const Period& p, Integer n) {
+    return Period(n * p.length(), p.units());
+  }
+
+  /**
+   * Divide the length of the period by n, if possible.
+   * @relates Period
+   */
   Period operator/(const Period&, Integer n);
 
-  /*! \relates Period */
+  /**
+   * Add two periods together.
+   * @relates Period
+   */
   Period operator+(const Period&, const Period&);
 
-  /*! \relates Period */
+  /**
+   * Subtract one period from the other.
+   * @relates Period
+   */
   Period operator-(const Period&, const Period&);
 
-  /*! \relates Period */
+  /**
+   * Less than operator.
+   * @relates Period
+   */
   bool operator<(const Period&, const Period&);
 
-  /*! \relates Period */
-  bool operator==(const Period&, const Period&);
+  /**
+   * Equivalence operator.
+   * @relates Period
+   */
+  inline bool operator==(const Period& p1, const Period& p2) {
+    return !(p1 < p2 || p2 < p1);
+  }
 
-  /*! \relates Period */
-  bool operator!=(const Period&, const Period&);
+  /**
+   * Not equal operator
+   * @relates Period
+   */
+  inline bool operator!=(const Period& p1, const Period& p2) {
+    return !(p1 == p2);
+  }
 
-  /*! \relates Period */
-  bool operator>(const Period&, const Period&);
+  /**
+   * Greater than operator
+   * @relates Period
+   */
+  inline bool operator>(const Period& p1, const Period& p2) {
+    return p2 < p1;
+  }
 
-  /*! \relates Period */
-  bool operator<=(const Period&, const Period&);
+  /**
+   * Less than or equal operator
+   * @relates Period
+   */
+  inline bool operator<=(const Period& p1, const Period& p2) {
+    return !(p1 > p2);
+  }
 
-  /*! \relates Period */
-  bool operator>=(const Period&, const Period&);
+  /**
+   * Greater than or equal operator
+   * @relates Period
+   */
+  inline bool operator>=(const Period& p1, const Period& p2) {
+    return !(p1 < p2);
+  }
 
-  /*! \relates Period */
+  /**
+   * Output operator
+   * @relates Period
+   */
   std::ostream& operator<<(std::ostream&, const Period&);
 
   namespace detail {
-
     struct long_period_holder {
       long_period_holder(const Period& p) : p(p) {}
       Period p;
@@ -145,11 +238,9 @@ namespace MathFin {
       Period p;
     };
     std::ostream& operator<<(std::ostream&, const short_period_holder&);
-
   }
 
   namespace io {
-
     //! output periods in long format (e.g. "2 weeks")
     /*! \ingroup manips */
     detail::long_period_holder long_period(const Period&);
@@ -157,51 +248,6 @@ namespace MathFin {
     //! output periods in short format (e.g. "2w")
     /*! \ingroup manips */
     detail::short_period_holder short_period(const Period&);
-
-  }
-
-  // inline definitions
-
-  template <typename T>
-  inline Period operator*(T n, TimeUnit units) {
-    return Period(Integer(n), units);
-  }
-
-  template <typename T>
-  inline Period operator*(TimeUnit units, T n) {
-    return Period(Integer(n),units);
-  }
-
-  inline Period operator-(const Period& p) {
-    return Period(-p.length(),p.units());
-  }
-
-  inline Period operator*(Integer n, const Period& p) {
-    return Period(n*p.length(),p.units());
-  }
-
-  inline Period operator*(const Period& p, Integer n) {
-    return Period(n*p.length(),p.units());
-  }
-
-  inline bool operator==(const Period& p1, const Period& p2) {
-    return !(p1 < p2 || p2 < p1);
-  }
-
-  inline bool operator!=(const Period& p1, const Period& p2) {
-    return !(p1 == p2);
-  }
-
-  inline bool operator>(const Period& p1, const Period& p2) {
-    return p2 < p1;
-  }
-
-  inline bool operator<=(const Period& p1, const Period& p2) {
-    return !(p1 > p2);
-  }
-
-  inline bool operator>=(const Period& p1, const Period& p2) {
-    return !(p1 < p2);
   }
 
 }

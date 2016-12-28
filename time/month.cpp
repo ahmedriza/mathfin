@@ -19,9 +19,11 @@
 
 /*
   Copyright (C) 2000, 2001, 2002, 2003 RiskMap srl
-  Copyright (C) 2003, 2004, 2005, 2006, 2007 StatPro Italia srl
-  Copyright (C) 2006 Piter Dias
-  Copyright (C) 2014 Paolo Mazzocchi
+  Copyright (C) 2003, 2004, 2005, 2006 StatPro Italia srl
+  Copyright (C) 2004, 2005, 2006 Ferdinando Ametrano
+  Copyright (C) 2006 Katiuscia Manzoni
+  Copyright (C) 2006 Toyin Akin
+  Copyright (C) 2015 Klaus Spanderen
 
   This file is part of QuantLib, a free-software/open-source library
   for financial quantitative analysts and developers - http://quantlib.org/
@@ -35,33 +37,44 @@
   This program is distributed in the hope that it will be useful, but WITHOUT
   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
   FOR A PARTICULAR PURPOSE.  See the license for more details.
-
 */
 
-#include <time/businessdayconvention.hpp>
-#include <base/error.hpp>
 #include <iostream>
+#include <time/month.hpp>
+#include <base/error.hpp>
 
 namespace MathFin {
 
-  std::ostream& operator<<(std::ostream& out, BusinessDayConvention b) {
-    switch (b) {
-    case BusinessDayConvention::Following:
-      return out << "Following";
-    case BusinessDayConvention::ModifiedFollowing:
-      return out << "Modified Following";
-    case BusinessDayConvention::HalfMonthModifiedFollowing:
-      return out << "Half-Month Modified Following";
-    case BusinessDayConvention::Preceding:
-      return out << "Preceding";
-    case BusinessDayConvention::ModifiedPreceding:
-      return out << "Modified Preceding";
-    case BusinessDayConvention::Unadjusted:
-      return out << "Unadjusted";
-    case BusinessDayConvention::Nearest:
-      return out << "Nearest";
+  std::ostream& operator<<(std::ostream& out, const Month& m) {
+    switch (m) {
+    case Month::January:
+      return out << "January";
+    case Month::February:
+      return out << "February";
+    case Month::March:
+      return out << "March";
+    case Month::April:
+      return out << "April";
+    case Month::May:
+      return out << "May";
+    case Month::June:
+      return out << "June";
+    case Month::July:
+      return out << "July";
+    case Month::August:
+      return out << "August";
+    case Month::September:
+      return out << "September";
+    case Month::October:
+      return out << "October";
+    case Month::November:
+      return out << "November";
+    case Month::December:
+      return out << "December";
     default:
-      MF_FAIL("Unknown BusinessDayConvention (" << int(b) << ")");
+      MF_FAIL("Unknown month (" << m << ")");
     }
   }
+
+
 }
