@@ -17,6 +17,23 @@
   with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+/*
+  Copyright (C) 2004, 2009 Ferdinando Ametrano
+  Copyright (C) 2006 Katiuscia Manzoni
+  Copyright (C) 2003 RiskMap srl
+  Copyright (C) 2015 Maddalena Zanzi
+  Copyright (c) 2015 Klaus Spanderen
+
+  QuantLib is free software: you can redistribute it and/or modify it
+  under the terms of the QuantLib license.  You should have received a
+  copy of the license along with this program; if not, please email
+  <quantlib-dev@lists.sf.net>. The license is also available online at
+  <http://quantlib.org/license.shtml>.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+  FOR A PARTICULAR PURPOSE.  See the license for more details.
+*/
 
 #include <time.h>
 #include <iostream>
@@ -77,12 +94,12 @@ namespace MathFin {
     Date d(
       31, // day
       Month::December, // month
-      2016,
-      21,
-      15,
-      30,
-      15,
-      10
+      2016, // year
+      21,   // hour
+      15,   // minute
+      30,   // seconds
+      15,   // milliseconds
+      10    // microseconds
       );
     REQUIRE(d.year() == 2016);
     REQUIRE(d.month() == Month::December);
@@ -95,8 +112,35 @@ namespace MathFin {
     REQUIRE(d.weekday() == Weekday::Saturday);
     REQUIRE(d.dayOfYear() == 366);
     REQUIRE(d.serialNumber() == 42735);
+
     REQUIRE(d.fractionOfDay() - 0.8857640626 < 1.0E-6);
-    REQUIRE(d.fractionOfSecond() - 0.01501 < 1.0E-12);
+
+    if (Date::ticksPerSecond() >= 1000000) {
+      REQUIRE(d.fractionOfSecond() - 0.01501 < 1.0E-12);
+    }
+
+    Date d2(
+      28, // day
+      Month::February, // month
+      2015, // year
+      50,   // hour
+      165,  // minute
+      476,  // seconds
+      1234, // milliseconds
+      253   // microseconds
+      );
+    REQUIRE(d2.year() == 2015);
+    REQUIRE(d2.month() == Month::March);
+    REQUIRE(d2.dayOfMonth() == 2);
+    REQUIRE(d2.hours() == 4);
+    REQUIRE(d2.minutes() == 52);
+    REQUIRE(d2.seconds() == 57);
+    if (Date::ticksPerSecond() >= 1000) {
+      REQUIRE(d2.milliseconds() == 234);
+    }
+    if (Date::ticksPerSecond() >= 1000000) {
+      REQUIRE(d2.microseconds() == 253);
+    }
   }
 
   // static public methods
@@ -120,5 +164,19 @@ namespace MathFin {
     Date d2(31, Month::December, 2016);
     Date::serial_type diff = d2 - d1;
     REQUIRE(diff == 1);
+  }
+
+  TEST_CASE("Consistency checks", "[date]") {
+    Date::serial_type minDate = Date::minDate().serialNumber() + 1; // 02 Jan 1901
+    Date::serial_type maxDate = Date::maxDate().serialNumber(); // 31 Dec 2199
+
+    REQUIRE(minDate == 368);
+    REQUIRE(maxDate == 109574);
+
+    for (Date::serial_type i = minDate; i <= maxDate; ++i) {
+      Date t(i);
+      Date::serial_type serial = t.serialNumber();
+      REQUIRE(serial == i);
+    }
   }
 }

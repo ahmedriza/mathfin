@@ -86,7 +86,7 @@ namespace MathFin {
 
 
   /*! \relates BusinessDayConvention */
-  std::ostream& operator<<(std::ostream&, BusinessDayConvention);
+  std::ostream& operator<<(std::ostream&, const BusinessDayConvention& b);
 
 }
 

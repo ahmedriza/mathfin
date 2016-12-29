@@ -25,9 +25,6 @@
   Copyright (C) 2006 Toyin Akin
   Copyright (C) 2015 Klaus Spanderen
 
-  This file is part of QuantLib, a free-software/open-source library
-  for financial quantitative analysts and developers - http://quantlib.org/
-
   QuantLib is free software: you can redistribute it and/or modify it
   under the terms of the QuantLib license.  You should have received a
   copy of the license along with this program; if not, please email
@@ -287,7 +284,9 @@ namespace MathFin {
     MF_REQUIRE(serialNumber >= minimumSerialNumber() &&
                serialNumber <= maximumSerialNumber(),
                "Date's serial number (" << serialNumber << ") outside "
-               "allowed range [" << minimumSerialNumber());
+               "allowed range [" << minimumSerialNumber() <<
+               ", ... ," << maximumSerialNumber() << "]";
+      );
   }
 
   // ---------------------------------------------------------------------------
@@ -321,7 +320,6 @@ namespace MathFin {
     const Year y = d.year();
     const Day eoM = boost::gregorian::gregorian_calendar::end_of_month_day(
       d.year(), mapMFDateType2Boost<compatibleEnums>(d.month()));
-
     return Date(eoM, m, y);
   }
 
@@ -373,13 +371,11 @@ namespace MathFin {
         const Day endOfMonthDay =
           boost::gregorian::gregorian_calendar::end_of_month_day(
             date.year(), date.month());
-
         if (units == TimeUnit::Months) {
           dt += boost::gregorian::months(n);
         } else {
           dt += boost::gregorian::years(n);
         }
-
         if (date.day() == endOfMonthDay) {
           // avoid snap-to-end-of-month behavior of boost::date_time
           const Day newEndOfMonthDay
@@ -398,15 +394,11 @@ namespace MathFin {
   } // end anonymous namespace
 
   Date Date::operator+(Date::serial_type days) const {
-    ptime dateTime = dateTime_;
-    dateTime += boost::gregorian::days(days);
-    return Date(dateTime);
+    return Date(dateTime_ + boost::gregorian::days(days));
   }
 
   Date Date::operator-(Date::serial_type days) const {
-    ptime dateTime = dateTime_;
-    dateTime -= boost::gregorian::days(days);
-    return Date(dateTime);
+    return Date(dateTime_ - boost::gregorian::days(days));
   }
 
   Date Date::operator+(const Period& p) const {

@@ -42,7 +42,7 @@
 
 namespace MathFin {
 
-  std::ostream& operator<<(std::ostream& out, Frequency f) {
+  std::ostream& operator<<(std::ostream& out, const Frequency& f) {
     switch (f) {
     case Frequency::NoFrequency:
       return out << "No-Frequency";

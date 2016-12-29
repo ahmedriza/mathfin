@@ -44,7 +44,7 @@
 
 namespace MathFin {
 
-  std::ostream& operator<<(std::ostream& out, BusinessDayConvention b) {
+  std::ostream& operator<<(std::ostream& out, const BusinessDayConvention& b) {
     switch (b) {
     case BusinessDayConvention::Following:
       return out << "Following";
