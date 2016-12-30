@@ -379,7 +379,7 @@ namespace MathFin {
    * @relates Date
    */
   // TODO
-  // std::ostream& operator<<(std::ostream&, const Date&);
+  std::ostream& operator<<(std::ostream&, const Date&);
 
 }
 

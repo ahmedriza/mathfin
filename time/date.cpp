@@ -455,7 +455,10 @@ namespace MathFin {
   // ---------------------------------------------------------------------------
 
   // TODO
-  // std::ostream& operator<<(std::ostream& out, const Date& d) {
+  std::ostream& operator<<(std::ostream& out, const Date& d) {
+    out << d.year() << "-" << as_integer(d.month()) << "-" << d.dayOfMonth();
+    return out;
+  }
 
   // ---------------------------------------------------------------------------
 

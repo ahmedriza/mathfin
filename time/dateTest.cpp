@@ -40,6 +40,7 @@
 #include <test/catch.hpp>
 #include <time/date.hpp>
 #include <base/error.hpp>
+#include <base/conversion.hpp>
 
 namespace MathFin {
 
@@ -170,13 +171,102 @@ namespace MathFin {
     Date::serial_type minDate = Date::minDate().serialNumber() + 1; // 02 Jan 1901
     Date::serial_type maxDate = Date::maxDate().serialNumber(); // 31 Dec 2199
 
-    REQUIRE(minDate == 368);
-    REQUIRE(maxDate == 109574);
+    Day dayOfYearOld = Date(minDate - 1).dayOfYear();
+    Day dayOfMonthOld = Date(minDate - 1).dayOfMonth();
+    Month monthOld = Date(minDate - 1).month();
+    Year yearOld = Date(minDate - 1).year();
+    Weekday weekdayOld = Date(minDate - 1).weekday();
 
     for (Date::serial_type i = minDate; i <= maxDate; ++i) {
       Date t(i);
-      Date::serial_type serial = t.serialNumber();
-      REQUIRE(serial == i);
-    }
+      REQUIRE(t.serialNumber() == i);
+
+      Day dayOfYear = t.dayOfYear();
+      Day dayOfMonth = t.dayOfMonth();
+      Month month = t.month();
+      Year year = t.year();
+      Weekday weekday = t.weekday();
+
+      if (!((dayOfYear == dayOfYearOld + 1) ||
+            (dayOfYear == 1 && dayOfYearOld == 365 && !Date::isLeap(yearOld)) ||
+            (dayOfYear == 1 && dayOfYearOld == 366 && Date::isLeap(yearOld)))) {
+        FAIL("wrong day of year increment: \n"
+             << "    date: " << t << "\n"
+             << "    day of year: " << dayOfYear << "\n"
+             << "    previous:    " << dayOfYearOld);
+      }
+
+      dayOfYearOld = dayOfYear;
+
+      if (!((dayOfMonth == dayOfMonthOld + 1 && month == monthOld  && year == yearOld) ||
+            (dayOfMonth == 1  && as_integer(month) == as_integer(monthOld) + 1 && year == yearOld) ||
+            (dayOfMonth == 1  && month == Month::January && year == yearOld +1 ))) {
+        FAIL("wrong day,month,year increment: \n"
+             << "    date: " << t << "\n"
+             << "    day,month,year: "
+             << dayOfMonth << "," << month << "," << year << "\n"
+             << "    previous:       "
+             << dayOfMonthOld << "," << monthOld << "," << yearOld);
+      }
+
+      dayOfMonthOld = dayOfMonth;
+      monthOld = month;
+      yearOld = year;
+
+      // check month definition
+      if (as_integer(month) < 1 || as_integer(month) > 12) {
+        FAIL("invalid month: \n"
+             << "    date:  " << t << "\n"
+             << "    month: " << month);
+      }
+
+      // check day definition
+      if (dayOfMonth < 1) {
+        FAIL("invalid day of month: \n"
+             << "    date:  " << t << "\n"
+             << "    day: " << dayOfMonth);
+      }
+
+      if (!((month == Month::January    && dayOfMonth <= 31) ||
+            (month == Month::February   && dayOfMonth <= 28) ||
+            (month == Month::February   && dayOfMonth == 29 && Date::isLeap(year)) ||
+            (month == Month::March      && dayOfMonth <= 31) ||
+            (month == Month::April      && dayOfMonth <= 30) ||
+            (month == Month::May        && dayOfMonth <= 31) ||
+            (month == Month::June       && dayOfMonth <= 30) ||
+            (month == Month::July       && dayOfMonth <= 31) ||
+            (month == Month::August     && dayOfMonth <= 31) ||
+            (month == Month::September  && dayOfMonth <= 30) ||
+            (month == Month::October    && dayOfMonth <= 31) ||
+            (month == Month::November   && dayOfMonth <= 30) ||
+            (month == Month::December   && dayOfMonth <= 31))) {
+        FAIL("invalid day of month: \n"
+             << "    date:  " << t << "\n"
+             << "    day: " << dayOfMonth);
+      }
+
+      // check weekday definition
+      if (!((as_integer(weekday) == as_integer(weekdayOld) + 1) ||
+            (as_integer(weekday) == 1 && as_integer(weekdayOld) == 7))) {
+        FAIL("invalid weekday: \n"
+             << "    date:  " << t << "\n"
+             << "    weekday:  " << as_integer(weekday) << "\n"
+             << "    previous: " << as_integer(weekdayOld));
+      }
+
+      weekdayOld = weekday;
+
+      // create the same date with a different constructor
+      Date s(dayOfMonth, month, year);
+      // check serial number consistency
+      Date::serial_type serial = s.serialNumber();
+      if (serial != i) {
+        FAIL("inconsistent serial number:\n"
+             << "    date:          " << t << "\n"
+             << "    serial number: " << i << "\n"
+             << "    cloned date:   " <<  s << "\n"
+             << "    serial number: " << serial);
+      }
+    } // end for loop
   }
 }
