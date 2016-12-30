@@ -454,9 +454,17 @@ namespace MathFin {
 
   // ---------------------------------------------------------------------------
 
-  // TODO
   std::ostream& operator<<(std::ostream& out, const Date& d) {
-    out << d.year() << "-" << as_integer(d.month()) << "-" << d.dayOfMonth();
+    out << d.year() << "-"
+        << std::setw(2) << std::setfill('0') << as_integer(d.month()) << "-"
+        << std::setw(2) << std::setfill('0') << d.dayOfMonth()
+        << "T"
+        << std::setw(2) << std::setfill('0') << d.hours() << ":"
+        << std::setw(2) << std::setfill('0') << d.minutes() << ":"
+        << std::setw(2) << std::setfill('0') << d.seconds() << ","
+        << std::setw(3) << std::setfill('0') << d.milliseconds()
+        << std::setw(3) << std::setfill('0') << d.microseconds();
+
     return out;
   }
 

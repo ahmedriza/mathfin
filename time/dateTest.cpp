@@ -130,6 +130,7 @@ namespace MathFin {
       1234, // milliseconds
       253   // microseconds
       );
+
     REQUIRE(d2.year() == 2015);
     REQUIRE(d2.month() == Month::March);
     REQUIRE(d2.dayOfMonth() == 2);
@@ -179,6 +180,7 @@ namespace MathFin {
 
     for (Date::serial_type i = minDate; i <= maxDate; ++i) {
       Date t(i);
+
       REQUIRE(t.serialNumber() == i);
 
       Day dayOfYear = t.dayOfYear();

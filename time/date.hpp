@@ -378,7 +378,6 @@ namespace MathFin {
    * Output operator.
    * @relates Date
    */
-  // TODO
   std::ostream& operator<<(std::ostream&, const Date&);
 
 }
