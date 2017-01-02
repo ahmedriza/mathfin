@@ -26,6 +26,7 @@ this_include_HEADERS = \
 	date.hpp \
 	businessdayconvention.hpp \
 	dategeneration.hpp \
+	daycounter.hpp \
 	frequency.hpp \
 	month.hpp \
 	period.hpp \
@@ -43,7 +44,8 @@ libTime_la_SOURCES = \
 	month.cpp \
 	period.cpp \
 	timeunit.cpp \
-	weekday.cpp
+	weekday.cpp \
+	daycounters/actualactual.cpp
 
 libTime_la_CXXFLAGS = -std=c++11 $(BOOST_CPPFLAGS)
 

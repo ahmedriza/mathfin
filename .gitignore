@@ -57,6 +57,8 @@ docs/man
 
 *.trs
 
+.dirstamp
+
 .cproject
 .project
 .settings

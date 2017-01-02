@@ -23,7 +23,7 @@ dnl with this program. If not, see <http://www.gnu.org/licenses/>.
 AC_CONFIG_MACRO_DIR([m4])
 
 AC_INIT([MathFin], [1.0], [ahmed.riza@gmail.com])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_INIT_AUTOMAKE([-Wall -Werror subdir-objects foreign])
 m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 LT_INIT
 

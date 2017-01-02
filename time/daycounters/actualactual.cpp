@@ -206,7 +206,7 @@ namespace MathFin {
     }
 
     if (d1 > d2) {
-      return -yearFraction(d2,d1,Date(),Date());
+      return -yearFraction(d2, d1, Date(), Date());
     }
 
     Integer y1 = d1.year();
@@ -257,9 +257,10 @@ namespace MathFin {
     ptime p22 = p2;
     while (prev > p1) {
       prev = (Date(p22) - 1 * TimeUnit::Years).dateTime();
-      const auto pd = prev.date();
-      if (pd.day() == 28 && pd.month() == boost::gregorian::Feb
-          && boost::gregorian::gregorian_calendar::is_leap_year(pd.year())) {
+      Date tmp(prev);
+      if (tmp.dayOfMonth() == 28
+          && tmp.month() == Month::February
+          && Date::isLeap(tmp.year())) {
         prev += boost::gregorian::days(1);
       }
       if (prev >= p1) {
@@ -268,9 +269,9 @@ namespace MathFin {
       }
     }
 
+    const Date d2prime = Date(p22);
     Real daysInYear = 365.0;
 
-    const Date d2prime = Date(p22);
     if (Date::isLeap(d2prime.year())) {
       Date d = Date(29, Month::February, d2prime.year());
       if (d2prime > d && d1 <= d) {
