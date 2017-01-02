@@ -53,5 +53,6 @@ AC_CONFIG_FILES([
   docs/Makefile
   math/Makefile
   time/Makefile
+  time/daycounters/Makefile
   ])
 AC_OUTPUT

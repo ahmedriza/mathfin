@@ -40,6 +40,8 @@
 #ifndef MATHFIN_FREQUENCY_HPP
 #define MATHFIN_FREQUENCY_HPP
 
+#include <iosfwd>
+
 namespace MathFin {
 
   //! Frequency of events

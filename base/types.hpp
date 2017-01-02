@@ -43,6 +43,8 @@
 #ifndef MATHFIN_TYPES_HPP
 #define MATHFIN_TYPES_HPP
 
+#include <cstddef>
+
 /**
  * @defgroup types Numeric Types
  * A number of numeric types are defined in order to add clarity to function and

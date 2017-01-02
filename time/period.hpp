@@ -136,11 +136,25 @@ namespace MathFin {
   }
 
   /**
+   * Return a period of length n and units.
+   */
+  template <typename T>
+  inline Period operator*(T n, TimeUnit units) {
+    return Period(Integer(n), units);
+  }
+
+  /**
+   * Return a period of units and length n.
+   */
+  template <typename T>
+  inline Period operator*(TimeUnit units, T n) {
+    return Period(Integer(n), units);
+  }
+
+  /**
    * Return a period of length n * length of the given period and its units.
    * @relates Period
    */
-  Period operator*(Integer n, const Period&);
-
   inline Period operator*(Integer n, const Period& p) {
     return Period(n * p.length(), p.units());
   }

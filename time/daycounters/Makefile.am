@@ -16,43 +16,23 @@
 # You should have received a copy  of the GNU General Public License along
 # with this program. If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS = daycounters
-
-AM_CPPFLAGS = -std=c++11 $(BOOST_CPPFLAGS)
+AM_CPPFLAGS = -std=c++11 $(BOOST_CPPFLAGS) -I$(top_srcdir) -I$(top_builddir)
 
 this_includedir=${includedir}/${subdir}
 
 this_include_HEADERS = \
-	date.hpp \
-	businessdayconvention.hpp \
-	dategeneration.hpp \
-	frequency.hpp \
-	month.hpp \
-	period.hpp \
-	timeunit.hpp \
-	weekday.hpp
+	actual360.hpp \
+	actualactual.hpp
 
-lib_LTLIBRARIES = libTime.la
+noinst_LTLIBRARIES = libDayCounters.la
 
-libTime_la_SOURCES = \
-	date.cpp \
-	businessdayconvention.cpp \
-	dategeneration.cpp \
-	daycounter.hpp \
-	frequency.cpp \
-	month.cpp \
-	period.cpp \
-	timeunit.cpp \
-	weekday.cpp
+libDayCounters_la_SOURCES = \
+	actualactual.cpp
 
-libTime_la_CXXFLAGS = -std=c++11 $(BOOST_CPPFLAGS)
+libDayCounters_la_CXXFLAGS = -std=c++11 $(BOOST_CPPFLAGS)
 
-libTime_la_LDFLAGS = -version-info 1:0:0
-
-check_PROGRAMS = timeTest
-timeTest_SOURCES = businessdayconventionTest.cpp \
-									 dateTest.cpp \
-									 periodTest.cpp
-timeTest_LDADD = libTime.la ${top_builddir}/base/libBase.la
+check_PROGRAMS = daycountersTest
+daycountersTest_SOURCES = actualactualTest.cpp
+daycountersTest_LDADD = ../libTime.la libDayCounters.la ${top_builddir}/base/libBase.la
 TESTS = $(check_PROGRAMS)
 EXTRA_DIST = $(TESTS)

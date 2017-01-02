@@ -123,7 +123,7 @@ namespace MathFin {
     /**
      * Constructor taking day, month and year.
      */
-    Date(Day d, Month m, Year y);
+    explicit Date(Day d, Month m, Year y);
 
     /**
      * Constructor taking boost posix date time object
@@ -317,6 +317,8 @@ namespace MathFin {
     static const Size ticksPerSecond();
 
   private:
+    Date& operator=(const Date&) = delete;
+
     static Date::serial_type minimumSerialNumber();
     static Date::serial_type maximumSerialNumber();
     static void checkSerialNumber(Date::serial_type serialNumber);
@@ -334,7 +336,13 @@ namespace MathFin {
    * Difference in days (including fraction of days) between dates
    * @relates Date
    */
-  Time daysBetween(const Date&, const Date&);
+  Time daysBetween(const Date& d1, const Date& d2);
+
+  /**
+   * Difference in whole years between dates
+   * @relates Date
+   */
+  Integer yearsBetween(const Date& d1, const Date& d2);
 
   // -------------------------------------------------------------------------
 
