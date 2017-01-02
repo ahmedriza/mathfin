@@ -37,6 +37,8 @@
 
 #include <time.h>
 #include <iostream>
+#include <vector>
+
 #include <test/catch.hpp>
 #include <time/date.hpp>
 #include <base/error.hpp>
@@ -270,6 +272,15 @@ namespace MathFin {
              << "    serial number: " << serial);
       }
     } // end for loop
+  }
+
+  TEST_CASE("Container test", "[date]") {
+    std::vector<Date> v;
+    v.push_back(Date(1, Month::January, 2017));
+    v.push_back(Date(28, Month::February, 2017));
+    REQUIRE(v.size() == 2);
+    REQUIRE(v[0] == Date(1, Month::January, 2017));
+    REQUIRE(v[1] == Date(28, Month::February, 2017));
   }
 
 }

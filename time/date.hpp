@@ -133,7 +133,7 @@ namespace MathFin {
     /**
      * Constructor taking the full range of parameters.
      */
-    Date(Day d,
+    explicit Date(Day d,
          Month m,
          Year y,
          Hour hours,

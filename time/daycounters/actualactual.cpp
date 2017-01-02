@@ -236,6 +236,8 @@ namespace MathFin {
       return -yearFraction(d2, d1, Date(), Date());
     }
 
+    // https://en.wikipedia.org/wiki/Day_count_convention#Actual.2FActual_AFB
+    //
     // If the difference between d1 and d2 is more than 1 year,
     // count backwards from d2 to find the number of whole years.
     //
