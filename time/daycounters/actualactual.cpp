@@ -20,9 +20,6 @@
 /*
   Copyright (C) 2000, 2001, 2002, 2003 RiskMap srl
 
-  This file is part of QuantLib, a free-software/open-source library
-  for financial quantitative analysts and developers - http://quantlib.org/
-
   QuantLib is free software: you can redistribute it and/or modify it
   under the terms of the QuantLib license.  You should have received a
   copy of the license along with this program; if not, please email
@@ -34,7 +31,6 @@
   FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-#include <iostream>
 #include <tuple>
 #include <time/daycounters/actualactual.hpp>
 #include <time/period.hpp>
@@ -237,7 +233,7 @@ namespace MathFin {
     }
 
     if (d1 > d2) {
-      return -yearFraction(d2,d1,Date(),Date());
+      return -yearFraction(d2, d1, Date(), Date());
     }
 
     // If the difference between d1 and d2 is more than 1 year,
@@ -253,13 +249,13 @@ namespace MathFin {
 
     Time numberOfYears = 0.0;
 
-    ptime p1 = d1.dateTime();
-    ptime p2 = d2.dateTime();
+    const ptime p1 = d1.dateTime();
+    const ptime p2 = d2.dateTime();
     ptime prev = p2;
     ptime p22 = p2;
     while (prev > p1) {
       prev = (Date(p22) - 1 * TimeUnit::Years).dateTime();
-      auto pd = prev.date();
+      const auto pd = prev.date();
       if (pd.day() == 28 && pd.month() == boost::gregorian::Feb
           && boost::gregorian::gregorian_calendar::is_leap_year(pd.year())) {
         prev += boost::gregorian::days(1);
@@ -272,7 +268,7 @@ namespace MathFin {
 
     Real daysInYear = 365.0;
 
-    Date d2prime = Date(p22);
+    const Date d2prime = Date(p22);
     if (Date::isLeap(d2prime.year())) {
       Date d = Date(29, Month::February, d2prime.year());
       if (d2prime > d && d1 <= d) {

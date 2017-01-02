@@ -338,12 +338,6 @@ namespace MathFin {
    */
   Time daysBetween(const Date& d1, const Date& d2);
 
-  /**
-   * Difference in whole years between dates
-   * @relates Date
-   */
-  Integer yearsBetween(const Date& d1, const Date& d2);
-
   // -------------------------------------------------------------------------
 
   /**

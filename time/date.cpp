@@ -426,14 +426,6 @@ namespace MathFin {
     return days + d2.fractionOfDay() - d1.fractionOfDay();
   }
 
-  // Difference in whole years between dates
-  // Used in the implementation of Actual/Actual (AFB) DayCounter
-  Integer yearsBetween(const Date& d1, const Date& d2) {
-    ptime p1 = d1.dateTime();
-    ptime p2 = d2.dateTime();
-    return 0;
-  }
-
   // ---------------------------------------------------------------------------
 
   bool operator==(const Date& d1, const Date& d2) {
