@@ -258,6 +258,10 @@ namespace MathFin {
       / Real(ticksPerSecond());
   }
 
+  Real Date::lengthOfYear() const {
+    return isLeap(year()) ? 366.0 : 365.0;
+  }
+
   // ---------------------------------------------------------------------------
   // static private members.
 

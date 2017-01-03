@@ -211,13 +211,16 @@ namespace MathFin {
 
     Integer y1 = d1.year();
     Integer y2 = d2.year();
-    Real dib1 = (Date::isLeap(y1) ? 366.0 : 365.0);
-    Real dib2 = (Date::isLeap(y2) ? 366.0 : 365.0);
+
+    Real dib1 = d1.lengthOfYear();
+    Real dib2 = d2.lengthOfYear();
 
     Time sum = y2 - y1 - 1;
     // FLOATING_POINT_EXCEPTION
-    sum += daysBetween(d1, Date(1, Month::January, y1+1)) / dib1;
-    sum += daysBetween(Date(1, Month::January, y2), d2) / dib2;
+    Real days1 = daysBetween(d1, Date(1, Month::January, y1 + 1)) / dib1;
+    Real days2 = daysBetween(Date(1, Month::January, y2), d2) / dib2;
+    sum += (days1 + days2);
+    std::cout << "days1: " << days1 << ", days2: " << days2 << ", sum: " << sum << std::endl;
     return sum;
   }
 

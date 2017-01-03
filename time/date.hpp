@@ -222,6 +222,12 @@ namespace MathFin {
 
     const boost::posix_time::ptime& dateTime() const { return dateTime_; }
 
+    /**
+     * Get the number of days in the year.
+     * If the year is a leap year, return 366 otherwise return 365.
+     */
+    Real lengthOfYear() const;
+
     /** @} */ // end of inspectors.
 
     // -------------------------------------------------------------------------
