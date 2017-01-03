@@ -77,42 +77,50 @@ TEST_CASE("Actual/Actual (AFB)", "[daycounters]") {
 }
 
 TEST_CASE("Actual/Actual (ISDA)", "[daycounters]") {
+  // Semin-annual payments
   ActualActual dc(ActualActual::Convention::ISDA);
   Date d11(1, Month::November, 2003);
   Date d21(1, Month::May, 2004);
   Time yf = dc.yearFraction(d11, d21, Date(), Date());
-  REQUIRE(yf - 0.497724381 <= EPS);
+  REQUIRE(yf - (61/365.0 + 121/366.0) <= EPS);
 
+  // Short first calcualtion period.
+  // Annual payments
   Date d12(1, Month::February, 1999);
   Date d22(1, Month::July, 1999);
   yf = dc.yearFraction(d12, d22, Date(), Date());
-  REQUIRE(yf - 0.410958904110 <= EPS);
+  REQUIRE(yf - (150/365.0) <= EPS);
 
   Date d13(1, Month::July, 1999);
   Date d23(1, Month::July, 2000);
   yf = dc.yearFraction(d13, d23, Date(), Date());
-  REQUIRE(yf - 1.001377349 <= EPS);
+  REQUIRE(yf - (184/365.0 + 182/366.0) <= EPS);
 
+  // Long first calculation period.
+  // Annual payments
   Date d14(15, Month::August, 2002);
   Date d24(15, Month::July, 2003);
   yf = dc.yearFraction(d14, d24, Date(), Date());
-  REQUIRE(yf - 0.915068493151 <= EPS);
+  REQUIRE(yf - 334/365.0 <= EPS);
 
   Date d15(15, Month::July, 2003);
   Date d25(15, Month::January, 2004);
   yf = dc.yearFraction(d15, d25, Date(), Date());
-  REQUIRE(yf - 0.504005 <= EPS);
+  REQUIRE(yf - (170/365.0 + 14/366.0)  <= EPS);
 
+  // Short final calculation period
+  // Semi-annual payments
   Date d16(30, Month::July, 1999);
   Date d26(30, Month::January, 2000);
   yf = dc.yearFraction(d16, d26, Date(), Date());
-  REQUIRE(yf - 0.503892506924 <= EPS);
+  REQUIRE(yf - (155/365.0 + 29/366.0) <= EPS);
 
   Date d17(30, Month::January, 2000);
   Date d27(30, Month::June, 2000);
   yf = dc.yearFraction(d17, d27, Date(), Date());
-  REQUIRE(yf - 0.415300546448 <= EPS);
+  REQUIRE(yf - (152/366.0) <= EPS);
 
+  // Greater than 2 years across a leap year.
   Date d18(30, Month::December, 2010);
   Date d28(2, Month::January, 2013);
   yf = dc.yearFraction(d18, d28, Date(), Date());
