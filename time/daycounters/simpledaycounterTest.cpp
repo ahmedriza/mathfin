@@ -42,7 +42,7 @@ TEST_CASE("SimpleDayCounter", "[daycounters]") {
   Date last(31, Month::December, 2005);
 
   // generate dates from [first, last]
-  Date::serial_type days = last - first + 1;
+  int days = last - first + 1;
   std::vector<Date> dates;
   for (auto i : boost::irange(0, days)) {
     dates.push_back(first + i);
