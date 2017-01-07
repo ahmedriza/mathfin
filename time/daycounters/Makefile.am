@@ -36,6 +36,7 @@ this_include_HEADERS = \
 check_PROGRAMS = daycountersTest
 daycountersTest_SOURCES = actualactualTest.cpp \
 													business252Test.cpp \
+													oneTest.cpp \
 													simpledaycounterTest.cpp \
 													thirty360Test.cpp
 daycountersTest_LDADD = ../libTime.la ${top_builddir}/base/libBase.la
