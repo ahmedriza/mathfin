@@ -19,7 +19,6 @@
 
 #include <iostream>
 #include <vector>
-#include <boost/range/irange.hpp>
 
 #include <test/catch.hpp>
 #include <base/types.hpp>
