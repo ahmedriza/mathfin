@@ -1,5 +1,5 @@
 
-# Copyright (C) 2016 Ahmed Riza
+# Copyright (C) 2017 Ahmed Riza
 
 # This file is part of MathFin.
 
@@ -21,22 +21,9 @@ AM_CPPFLAGS = -std=c++11 $(BOOST_CPPFLAGS) -I$(top_srcdir) -I$(top_builddir)
 this_includedir=${includedir}/${subdir}
 
 this_include_HEADERS = \
-	actual360.hpp \
-	actual365fixed.hpp \
-	actual365nl.hpp \
-	actualactual.hpp \
-	business252.hpp \
-	simpledaycounter.hpp \
-	thirty360.hpp
-
-# noinst_LTLIBRARIES = libDayCounters.la
-# libDayCounters_la_SOURCES = actualactual.cpp
-# libDayCounters_la_CXXFLAGS = -std=c++11 $(BOOST_CPPFLAGS)
-
-check_PROGRAMS = daycountersTest
-daycountersTest_SOURCES = actualactualTest.cpp \
-													business252Test.cpp \
-													simpledaycounterTest.cpp
-daycountersTest_LDADD = ../libTime.la ${top_builddir}/base/libBase.la
-TESTS = $(check_PROGRAMS)
-EXTRA_DIST = $(TESTS)
+	australia.hpp \
+	brazil.hpp \
+	nullcalendar.hpp \
+	target.hpp \
+	unitedkingdom.hpp \
+	unitedstates.hpp

@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2016 Ahmed Riza
+  Copyright (C) 2017 Ahmed Riza
 
   This file is part of MathFin.
 
@@ -18,7 +18,7 @@
 */
 
 /*
-  Copyright (C) 2000, 2001, 2002, 2003 RiskMap srl
+  Copyright (C) 2003 RiskMap srl
 
   This file is part of QuantLib, a free-software/open-source library
   for financial quantitative analysts and developers - http://quantlib.org/
@@ -34,43 +34,38 @@
   FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-/**
- * @file actual360.hpp
- * @brief act/360 day counter
- */
-
-#ifndef MATHFIN_ACTUAL360_HPP
-#define MATHFIN_ACTUAL360_HPP
-
-#include <time/daycounter.hpp>
+#include <time/daycounters/simpledaycounter.hpp>
+#include <time/daycounters/thirty360.hpp>
 
 namespace MathFin {
 
-  /** Actual/360 day count convention
-   * Actual/360 day count convention, also known as "Act/360", or "A/360".
-   * @ingroup daycounters
-   */
-  class Actual360 : public DayCounter {
+  namespace { DayCounter fallback = Thirty360(); }
 
-  public:
-    Actual360()
-      : DayCounter(std::shared_ptr<DayCounter::Impl>(new Actual360::Impl)) {}
+  Date::serial_type SimpleDayCounter::Impl::dayCount(
+    const Date& d1,
+    const Date& d2) const {
+    return fallback.dayCount(d1,d2);
+  }
 
-  private:
-    class Impl : public DayCounter::Impl {
-    public:
-      std::string name() const { return std::string("Actual/360"); }
+  Time SimpleDayCounter::Impl::yearFraction(
+    const Date& d1,
+    const Date& d2,
+    const Date&,
+    const Date&
+    ) const {
+    Day dm1 = d1.dayOfMonth();
+    Day dm2 = d2.dayOfMonth();
 
-      Time yearFraction(
-        const Date& d1,
-        const Date& d2,
-        const Date&,
-        const Date&) const {
-        return daysBetween(d1,d2) / 360.0;
-      }
-    };
-  };
+    if (dm1 == dm2 ||
+        // e.g., Aug 30 -> Feb 28 ?
+        (dm1 > dm2 && Date::isEndOfMonth(d2)) ||
+        // e.g., Feb 28 -> Aug 30 ?
+        (dm1 < dm2 && Date::isEndOfMonth(d1))) {
+      return (d2.year()-d1.year()) +
+        (Integer(d2.month())-Integer(d1.month()))/12.0;
+    } else {
+      return fallback.yearFraction(d1,d2);
+    }
+  }
 
 }
-
-#endif /* MATHFIN_ACTUAL360_HPP */

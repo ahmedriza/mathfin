@@ -38,6 +38,7 @@
 #ifndef MATHFIN_DAYCOUNTER_HPP
 #define MATHFIN_DAYCOUNTER_HPP
 
+#include <memory>
 #include <string>
 #include <time/date.hpp>
 #include <base/error.hpp>
@@ -73,13 +74,13 @@ namespace MathFin {
         const Date& refPeriodEnd) const = 0;
     };
 
-    boost::shared_ptr<Impl> impl_;
+    std::shared_ptr<Impl> impl_;
 
     /**
      * This constructor can be invoked by derived classes which
      * define a given implementation.
      */
-    DayCounter(const boost::shared_ptr<Impl>& impl) : impl_(impl) {}
+    DayCounter(const std::shared_ptr<Impl>& impl) : impl_(impl) {}
 
   public:
     /**

@@ -18,6 +18,7 @@
 */
 
 /*
+  Copyright (C) 2004 Ferdinando Ametrano
   Copyright (C) 2000, 2001, 2002, 2003 RiskMap srl
 
   This file is part of QuantLib, a free-software/open-source library
@@ -34,43 +35,50 @@
   FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-/**
- * @file actual360.hpp
- * @brief act/360 day counter
- */
+/*! \file actual365fixed.hpp
+  \brief Actual/365 (Fixed) day counter
+*/
 
-#ifndef MATHFIN_ACTUAL360_HPP
-#define MATHFIN_ACTUAL360_HPP
+#ifndef MATHFIN_ACTUAL_365_FIXED_HPP
+#define MATHFIN_ACTUAL_365_FIXED_HPP
 
+#include <string>
 #include <time/daycounter.hpp>
 
 namespace MathFin {
 
-  /** Actual/360 day count convention
-   * Actual/360 day count convention, also known as "Act/360", or "A/360".
+  /**
+   * Actual/365 (Fixed) day count convention.
+   * "Actual/365 (Fixed)" day count convention, also know as
+   * "Act/365 (Fixed)", "A/365 (Fixed)", or "A/365F".
+   *
+   * @warning According to ISDA, "Actual/365" (without "Fixed") is
+   * an alias for "Actual/Actual (ISDA)" (see
+   *    ActualActual.)  If Actual/365 is not explicitly
+   *    specified as fixed in an instrument specification,
+   *    you might want to double-check its meaning.
+   *
    * @ingroup daycounters
-   */
-  class Actual360 : public DayCounter {
-
-  public:
-    Actual360()
-      : DayCounter(std::shared_ptr<DayCounter::Impl>(new Actual360::Impl)) {}
-
+  */
+  class Actual365Fixed : public DayCounter {
   private:
     class Impl : public DayCounter::Impl {
     public:
-      std::string name() const { return std::string("Actual/360"); }
-
+      std::string name() const { return std::string("Actual/365 (Fixed)"); }
       Time yearFraction(
         const Date& d1,
         const Date& d2,
         const Date&,
         const Date&) const {
-        return daysBetween(d1,d2) / 360.0;
+        return daysBetween(d1,d2) / 365.0;
       }
     };
+  public:
+    Actual365Fixed()
+      : DayCounter(std::shared_ptr<DayCounter::Impl>(
+                     new Actual365Fixed::Impl)) {}
   };
 
 }
 
-#endif /* MATHFIN_ACTUAL360_HPP */
+#endif /* MATHFIN_ACTUAL_365_FIXED_HPP */

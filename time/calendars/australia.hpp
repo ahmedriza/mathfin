@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2016 Ahmed Riza
+  Copyright (C) 2017 Ahmed Riza
 
   This file is part of MathFin.
 
@@ -34,43 +34,44 @@
   FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-/**
- * @file actual360.hpp
- * @brief act/360 day counter
- */
+#ifndef MATHFIN_AUSTRALIA_CALENDAR_HPP
+#define MATHFIN_AUSTRALIA_CALENDAR_HPP
 
-#ifndef MATHFIN_ACTUAL360_HPP
-#define MATHFIN_ACTUAL360_HPP
-
-#include <time/daycounter.hpp>
+#include <time/calendar.hpp>
 
 namespace MathFin {
 
-  /** Actual/360 day count convention
-   * Actual/360 day count convention, also known as "Act/360", or "A/360".
-   * @ingroup daycounters
-   */
-  class Actual360 : public DayCounter {
+  //! Australian calendar
+  /*! Holidays:
+    <ul>
+    <li>Saturdays</li>
+    <li>Sundays</li>
+    <li>New Year's Day, January 1st</li>
+    <li>Australia Day, January 26th (possibly moved to Monday)</li>
+    <li>Good Friday</li>
+    <li>Easter Monday</li>
+    <li>ANZAC Day. April 25th (possibly moved to Monday)</li>
+    <li>Queen's Birthday, second Monday in June</li>
+    <li>Bank Holiday, first Monday in August</li>
+    <li>Labour Day, first Monday in October</li>
+    <li>Christmas, December 25th (possibly moved to Monday or Tuesday)</li>
+    <li>Boxing Day, December 26th (possibly moved to Monday or
+    Tuesday)</li>
+    </ul>
 
-  public:
-    Actual360()
-      : DayCounter(std::shared_ptr<DayCounter::Impl>(new Actual360::Impl)) {}
-
+    \ingroup calendars
+  */
+  class Australia : public Calendar {
   private:
-    class Impl : public DayCounter::Impl {
+    class Impl : public Calendar::WesternImpl {
     public:
-      std::string name() const { return std::string("Actual/360"); }
-
-      Time yearFraction(
-        const Date& d1,
-        const Date& d2,
-        const Date&,
-        const Date&) const {
-        return daysBetween(d1,d2) / 360.0;
-      }
+      std::string name() const { return "Australia"; }
+      bool isBusinessDay(const Date&) const;
     };
+  public:
+    Australia();
   };
 
 }
 
-#endif /* MATHFIN_ACTUAL360_HPP */
+#endif /* MATHFIN_AUSTRALIA_CALENDAR_HPP */

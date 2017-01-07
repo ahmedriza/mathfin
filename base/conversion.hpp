@@ -21,6 +21,9 @@
  * @file conversion.hpp
  * @brief Utility methods for type conversions.
  */
+
+#include <type_traits>
+
 namespace MathFin {
 
   /**

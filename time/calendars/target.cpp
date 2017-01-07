@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2016 Ahmed Riza
+  Copyright (C) 2017 Ahmed Riza
 
   This file is part of MathFin.
 
@@ -34,43 +34,38 @@
   FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-/**
- * @file actual360.hpp
- * @brief act/360 day counter
- */
-
-#ifndef MATHFIN_ACTUAL360_HPP
-#define MATHFIN_ACTUAL360_HPP
-
-#include <time/daycounter.hpp>
+#include <time/calendars/target.hpp>
 
 namespace MathFin {
 
-  /** Actual/360 day count convention
-   * Actual/360 day count convention, also known as "Act/360", or "A/360".
-   * @ingroup daycounters
-   */
-  class Actual360 : public DayCounter {
+  TARGET::TARGET() :
+    Calendar(std::shared_ptr<Calendar::Impl>(new TARGET::Impl))
+  {}
 
-  public:
-    Actual360()
-      : DayCounter(std::shared_ptr<DayCounter::Impl>(new Actual360::Impl)) {}
-
-  private:
-    class Impl : public DayCounter::Impl {
-    public:
-      std::string name() const { return std::string("Actual/360"); }
-
-      Time yearFraction(
-        const Date& d1,
-        const Date& d2,
-        const Date&,
-        const Date&) const {
-        return daysBetween(d1,d2) / 360.0;
-      }
-    };
-  };
+  bool TARGET::Impl::isBusinessDay(const Date& date) const {
+    Weekday w = date.weekday();
+    Day d = date.dayOfMonth(), dd = date.dayOfYear();
+    Month m = date.month();
+    Year y = date.year();
+    Day em = easterMonday(y);
+    if (isWeekend(w)
+        // New Year's Day
+        || (d == 1  && m == Month::January)
+        // Good Friday
+        || (dd == em-3 && y >= 2000)
+        // Easter Monday
+        || (dd == em && y >= 2000)
+        // Labour Day
+        || (d == 1  && m == Month::May && y >= 2000)
+        // Christmas
+        || (d == 25 && m == Month::December)
+        // Day of Goodwill
+        || (d == 26 && m == Month::December && y >= 2000)
+        // December 31st, 1998, 1999, and 2001 only
+        || (d == 31 && m == Month::December &&
+            (y == 1998 || y == 1999 || y == 2001)))
+      return false;
+    return true;
+  }
 
 }
-
-#endif /* MATHFIN_ACTUAL360_HPP */

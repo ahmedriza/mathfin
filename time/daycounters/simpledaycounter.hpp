@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2016 Ahmed Riza
+  Copyright (C) 2017 Ahmed Riza
 
   This file is part of MathFin.
 
@@ -18,7 +18,7 @@
 */
 
 /*
-  Copyright (C) 2000, 2001, 2002, 2003 RiskMap srl
+  Copyright (C) 2003 RiskMap srl
 
   This file is part of QuantLib, a free-software/open-source library
   for financial quantitative analysts and developers - http://quantlib.org/
@@ -34,43 +34,51 @@
   FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-/**
- * @file actual360.hpp
- * @brief act/360 day counter
- */
+/*! \file simpledaycounter.hpp
+  \brief Simple day counter for reproducing theoretical calculations
+*/
 
-#ifndef MATHFIN_ACTUAL360_HPP
-#define MATHFIN_ACTUAL360_HPP
+#ifndef MATFHIN_SIMPLE_DAY_COUNTER_HPP
+#define MATFHIN_SIMPLE_DAY_COUNTER_HPP
 
 #include <time/daycounter.hpp>
 
 namespace MathFin {
 
-  /** Actual/360 day count convention
-   * Actual/360 day count convention, also known as "Act/360", or "A/360".
+  /**
+   * Simple day counter for reproducing theoretical calculations.
+   * This day counter tries to ensure that whole-month distances
+   * are returned as a simple fraction, i.e., 1 year = 1.0,
+   * 6 months = 0.5, 3 months = 0.25 and so forth.
+   *
+   * @warning this day counter should be used together with
+   * NullCalendar, which ensures that dates at whole-month
+   * distances share the same day of month. It is <b>not</b>
+   * guaranteed to work with any other calendar.
+   *
    * @ingroup daycounters
+   *
    */
-  class Actual360 : public DayCounter {
-
-  public:
-    Actual360()
-      : DayCounter(std::shared_ptr<DayCounter::Impl>(new Actual360::Impl)) {}
-
+  class SimpleDayCounter : public DayCounter {
   private:
     class Impl : public DayCounter::Impl {
     public:
-      std::string name() const { return std::string("Actual/360"); }
-
+      std::string name() const { return "Simple"; }
+      Date::serial_type dayCount(
+        const Date& d1,
+        const Date& d2) const;
       Time yearFraction(
         const Date& d1,
         const Date& d2,
         const Date&,
-        const Date&) const {
-        return daysBetween(d1,d2) / 360.0;
-      }
+        const Date&) const;
     };
+  public:
+    SimpleDayCounter()
+      : DayCounter(std::shared_ptr<DayCounter::Impl>(
+                     new SimpleDayCounter::Impl())) {}
   };
 
 }
 
-#endif /* MATHFIN_ACTUAL360_HPP */
+#endif /* MATFHIN_SIMPLE_DAY_COUNTER_HPP */

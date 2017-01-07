@@ -16,15 +16,17 @@
 # You should have received a copy  of the GNU General Public License along
 # with this program. If not, see <http://www.gnu.org/licenses/>.
 
-SUBDIRS = daycounters
+SUBDIRS = daycounters \
+					calendars
 
 AM_CPPFLAGS = -std=c++11 $(BOOST_CPPFLAGS)
 
 this_includedir=${includedir}/${subdir}
 
 this_include_HEADERS = \
-	date.hpp \
+	calendar.hpp \
 	businessdayconvention.hpp \
+	date.hpp \
 	dategeneration.hpp \
 	daycounter.hpp \
 	frequency.hpp \
@@ -36,16 +38,25 @@ this_include_HEADERS = \
 lib_LTLIBRARIES = libTime.la
 
 libTime_la_SOURCES = \
-	date.cpp \
 	businessdayconvention.cpp \
+	calendar.cpp \
+	calendars/australia.cpp \
+	calendars/brazil.cpp \
+	calendars/target.cpp \
+	calendars/unitedkingdom.cpp \
+	calendars/unitedstates.cpp \
+	date.cpp \
 	dategeneration.cpp \
 	daycounter.hpp \
+	daycounters/actualactual.cpp \
+	daycounters/business252.cpp \
+	daycounters/simpledaycounter.cpp \
+	daycounters/thirty360.cpp \
 	frequency.cpp \
 	month.cpp \
 	period.cpp \
 	timeunit.cpp \
-	weekday.cpp \
-	daycounters/actualactual.cpp
+	weekday.cpp
 
 libTime_la_CXXFLAGS = -std=c++11 $(BOOST_CPPFLAGS)
 
@@ -53,6 +64,7 @@ libTime_la_LDFLAGS = -version-info 1:0:0
 
 check_PROGRAMS = timeTest
 timeTest_SOURCES = businessdayconventionTest.cpp \
+									 calendarTest.cpp \
 									 dateTest.cpp \
 									 periodTest.cpp
 timeTest_LDADD = libTime.la ${top_builddir}/base/libBase.la

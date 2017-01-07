@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2016 Ahmed Riza
+  Copyright (C) 2017 Ahmed Riza
 
   This file is part of MathFin.
 
@@ -18,7 +18,8 @@
 */
 
 /*
-  Copyright (C) 2000, 2001, 2002, 2003 RiskMap srl
+  Copyright (C) 2003 RiskMap srl
+  Copyright (C) 2007 StatPro Italia srl
 
   This file is part of QuantLib, a free-software/open-source library
   for financial quantitative analysts and developers - http://quantlib.org/
@@ -34,43 +35,38 @@
   FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-/**
- * @file actual360.hpp
- * @brief act/360 day counter
- */
+/*! \file nullcalendar.hpp
+  \brief Calendar for reproducing theoretical calculations
+*/
 
-#ifndef MATHFIN_ACTUAL360_HPP
-#define MATHFIN_ACTUAL360_HPP
+#ifndef MATHFIN_NULL_CALENDAR_HPP
+#define MATHFIN_NULL_CALENDAR_HPP
 
-#include <time/daycounter.hpp>
+#include <time/calendar.hpp>
 
 namespace MathFin {
 
-  /** Actual/360 day count convention
-   * Actual/360 day count convention, also known as "Act/360", or "A/360".
-   * @ingroup daycounters
-   */
-  class Actual360 : public DayCounter {
-
-  public:
-    Actual360()
-      : DayCounter(std::shared_ptr<DayCounter::Impl>(new Actual360::Impl)) {}
-
+  /**
+   * Calendar for reproducing theoretical calculations.
+   * This calendar has no holidays. It ensures that dates at
+   * whole-month distances have the same day of month.
+   *
+   * @ingroup calendars
+  */
+  class NullCalendar : public Calendar {
   private:
-    class Impl : public DayCounter::Impl {
+    class Impl : public Calendar::Impl {
     public:
-      std::string name() const { return std::string("Actual/360"); }
-
-      Time yearFraction(
-        const Date& d1,
-        const Date& d2,
-        const Date&,
-        const Date&) const {
-        return daysBetween(d1,d2) / 360.0;
-      }
+      std::string name() const { return "Null"; }
+      bool isWeekend(Weekday) const { return false; }
+      bool isBusinessDay(const Date&) const { return true; }
     };
+  public:
+    NullCalendar() :
+      Calendar(
+        std::shared_ptr<Calendar::Impl>(new NullCalendar::Impl)) {}
   };
 
 }
 
-#endif /* MATHFIN_ACTUAL360_HPP */
+#endif /* MATHFIN_NULL_CALENDAR_HPP */

@@ -118,7 +118,7 @@ namespace MathFin {
         const Date& refPeriodEnd) const;
     };
 
-    static boost::shared_ptr<DayCounter::Impl> implementation(Convention c);
+    static std::shared_ptr<DayCounter::Impl> implementation(Convention c);
 
   };
 

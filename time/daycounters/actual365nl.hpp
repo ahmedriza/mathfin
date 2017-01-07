@@ -18,7 +18,7 @@
 */
 
 /*
-  Copyright (C) 2000, 2001, 2002, 2003 RiskMap srl
+  Copyright (C) 2013 BGC Partners L.P.
 
   This file is part of QuantLib, a free-software/open-source library
   for financial quantitative analysts and developers - http://quantlib.org/
@@ -34,43 +34,67 @@
   FOR A PARTICULAR PURPOSE.  See the license for more details.
 */
 
-/**
- * @file actual360.hpp
- * @brief act/360 day counter
- */
+#ifndef MATHFIN_ACTUAL_365NL_HPP
+#define MATHFIN_ACTUAL_365NL_HPP
 
-#ifndef MATHFIN_ACTUAL360_HPP
-#define MATHFIN_ACTUAL360_HPP
-
+#include <string>
 #include <time/daycounter.hpp>
 
 namespace MathFin {
 
-  /** Actual/360 day count convention
-   * Actual/360 day count convention, also known as "Act/360", or "A/360".
+  /**
+   *  Actual/365 (No Leap) day count convention.
+   * "Actual/365 (No Leap)" day count convention, also known as
+   * "Act/365 (NL)", "NL/365", or "Actual/365 (JGB)".
+   *
    * @ingroup daycounters
-   */
-  class Actual360 : public DayCounter {
-
-  public:
-    Actual360()
-      : DayCounter(std::shared_ptr<DayCounter::Impl>(new Actual360::Impl)) {}
-
+  */
+  class Actual365NoLeap : public DayCounter {
   private:
     class Impl : public DayCounter::Impl {
     public:
-      std::string name() const { return std::string("Actual/360"); }
+      std::string name() const { return std::string("Actual/365 (NL)"); }
+
+      // Returns the exact number of days between 2 dates, excluding leap days
+      Date::serial_type dayCount(
+        const Date& d1,
+        const Date& d2) const {
+
+        static const Integer MonthOffset[] = {
+          0,  31,  59,  90, 120, 151,  // Jan - Jun
+          181, 212, 243, 273, 304, 334   // Jun - Dec
+        };
+
+        Date::serial_type s1, s2;
+
+        s1 = d1.dayOfMonth() + MonthOffset[d1.month()-1] + (d1.year() * 365);
+        s2 = d2.dayOfMonth() + MonthOffset[d2.month()-1] + (d2.year() * 365);
+
+        if (d1.month() == Feb && d1.dayOfMonth() == 29) {
+          --s1;
+        }
+
+        if (d2.month() == Feb && d2.dayOfMonth() == 29) {
+          --s2;
+        }
+
+        return s2 - s1;
+      }
 
       Time yearFraction(
         const Date& d1,
         const Date& d2,
-        const Date&,
-        const Date&) const {
-        return daysBetween(d1,d2) / 360.0;
+        const Date& d3,
+        const Date& d4) const {
+        return dayCount(d1, d2)/365.0;
       }
     };
+  public:
+    Actual365NoLeap()
+      : DayCounter(std::shared_ptr<DayCounter::Impl>(
+                     new Actual365NoLeap::Impl)) {}
   };
 
 }
 
-#endif /* MATHFIN_ACTUAL360_HPP */
+#endif /* MATHFIN_ACTUAL_365NL_HPP */

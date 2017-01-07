@@ -40,19 +40,20 @@ using boost::posix_time::ptime;
 
 namespace MathFin {
 
-  boost::shared_ptr<DayCounter::Impl>
-  ActualActual::implementation(ActualActual::Convention c) {
+  std::shared_ptr<DayCounter::Impl> ActualActual::implementation(
+    ActualActual::Convention c
+    ) {
     switch (c) {
     case Convention::ISMA:
     case Convention::Bond:
-      return boost::shared_ptr<DayCounter::Impl>(new ISMA_Impl);
+      return std::shared_ptr<DayCounter::Impl>(new ISMA_Impl);
     case Convention::ISDA:
     case Convention::Historical:
     case Convention::Actual365:
-      return boost::shared_ptr<DayCounter::Impl>(new ISDA_Impl);
+      return std::shared_ptr<DayCounter::Impl>(new ISDA_Impl);
     case Convention::AFB:
     case Convention::Euro:
-      return boost::shared_ptr<DayCounter::Impl>(new AFB_Impl);
+      return std::shared_ptr<DayCounter::Impl>(new AFB_Impl);
     default:
       MF_FAIL("unknown act/act convention");
     }
@@ -220,7 +221,6 @@ namespace MathFin {
     Real days1 = daysBetween(d1, Date(1, Month::January, y1 + 1)) / dib1;
     Real days2 = daysBetween(Date(1, Month::January, y2), d2) / dib2;
     sum += (days1 + days2);
-    std::cout << "days1: " << days1 << ", days2: " << days2 << ", sum: " << sum << std::endl;
     return sum;
   }
 
